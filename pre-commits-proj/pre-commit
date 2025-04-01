@@ -1,0 +1,19 @@
+#!/bin/bash
+
+BLOCKED=$(git diff --cached --name-only | grep -E '\.(tmp|log)$')
+
+if [[ -n "$BLOCKED" ]]; then
+	echo "File types are not allowed"
+	echo "$BLOCKED"
+	exit 1
+fi
+
+SH_FILE=$(git diff --cached --name-only | grep -E '\.(sh)$')
+if [[ -n "$SH_FILE" ]]; then
+     for file in $SH_FILE; do 
+	if  grep -q '#Debug' "$file"; then
+	  echo " Commit blocked: Found '#DEBUG:' in $file"
+          exit 1
+	fi
+      done
+fi 

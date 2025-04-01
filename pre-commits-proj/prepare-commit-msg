@@ -1,0 +1,7 @@
+#!/bin/bash
+
+USERNAME=$(whoami)
+
+COM_MSG=$1
+
+sed -i "1s/^/[$USERNAME] /" "$COM_MSG"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+LARGE_FILES=$(find . -type f -size +1M | grep -v '\.git/')
+
+if [[ -n "$LARGE_FILES" ]]; then
+    echo "❌ Push blocked: The following files are larger than 1MB:"
+    echo "$LARGE_FILES"
+    exit 1
+fi

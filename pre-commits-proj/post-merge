@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo " Post-merge: Running system health checks..."
+echo " Disk usage:"
+df -h
+
+echo -e "\n Memory usage:"
+free -m
+
+echo -e "\n Running services:"
+systemctl list-units --type=service --state=running
